@@ -2115,6 +2115,40 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
   padding:4px 12px;color:#cc00ff;
 }
 #power-display.show{opacity:1;}
+
+/* ─── LANGUAGE SELECTOR ─── */
+#lang-screen{
+  position:absolute;inset:0;z-index:195;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 35%,#1a1000 0%,#08060c 65%);
+  gap:16px;padding:28px;
+}
+#lang-screen.hidden{display:none;}
+.lang-title{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(11px,3vw,16px);
+  letter-spacing:4px;color:rgba(255,214,10,.6);
+  margin-bottom:4px;
+}
+.lang-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:10px;width:100%;max-width:340px;
+}
+.lang-btn{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:14px 10px;border-radius:16px;cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  transition:all .18s cubic-bezier(.34,1.56,.64,1);
+  font-family:'Orbitron',monospace;
+}
+.lang-btn:hover,.lang-btn:active{
+  background:rgba(255,214,10,0.12);
+  border-color:rgba(255,214,10,0.4);
+  transform:scale(1.05);
+}
+.lang-flag{font-size:clamp(28px,6vw,40px);}
+.lang-name{font-size:clamp(7px,1.5vw,10px);letter-spacing:2px;color:rgba(255,255,255,.6);}
 </style>
 </head>
 <body>
@@ -2153,6 +2187,38 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
 </div>
 
 <!-- AUTH -->
+
+<!-- LANGUAGE SELECTOR -->
+<div id="lang-screen" class="hidden">
+  <div id="mascot-lang" style="width:64px;height:64px;margin-bottom:-4px;"></div>
+  <div class="lang-title">CHOOSE YOUR LANGUAGE</div>
+  <div class="lang-grid">
+    <button class="lang-btn" onclick="selectLang('fr')">
+      <span class="lang-flag">🇫🇷</span>
+      <span class="lang-name">FRANÇAIS</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('en')">
+      <span class="lang-flag">🇬🇧</span>
+      <span class="lang-name">ENGLISH</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('es')">
+      <span class="lang-flag">🇪🇸</span>
+      <span class="lang-name">ESPAÑOL</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('de')">
+      <span class="lang-flag">🇩🇪</span>
+      <span class="lang-name">DEUTSCH</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('it')">
+      <span class="lang-flag">🇮🇹</span>
+      <span class="lang-name">ITALIANO</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('hr')">
+      <span class="lang-flag">🇭🇷</span>
+      <span class="lang-name">HRVATSKI</span>
+    </button>
+  </div>
+</div>
 
 <div id="auth-screen" class="hidden">
   <div id="mascot-auth" style="width:64px;height:64px;"><svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated;image-rendering:crisp-edges;filter:drop-shadow(0 0 10px rgba(255,214,10,0.6))">
@@ -5822,6 +5888,129 @@ function endGame(){
 }
 
 // ─── LB SAVE ───
+
+// ══════════════════════════════════════════════════════════════
+// SYSTÈME DE LANGUE
+// ══════════════════════════════════════════════════════════════
+let _lang = 'fr';
+try{_lang = localStorage.getItem('sp_lang')||'fr';}catch(e){}
+
+const TRANSLATIONS = {
+  fr:{
+    play:'▶ JOUER', crash:'CRASH !', points:'POINTS', best:'MEILLEUR',
+    coins:'PIÈCES', replay:'▶ REJOUER', login:'CONNEXION', register:'CRÉER UN COMPTE',
+    username:'PSEUDO', password:'MOT DE PASSE', connect:'SE CONNECTER',
+    create:'CRÉER', noAccount:'Pas de compte ?', createAccount:'Créer un compte',
+    hasAccount:'Déjà un compte ?', signIn:'Se connecter',
+    scores:'🏆 SCORES', levels:'⚡ NIVEAUX', tuto:'📖 TUTO', shop:'🛒 SHOP', profile:'👤 PROFIL',
+    newRecord:'🏆 NOUVEAU RECORD !', studio:'WIKZOUU STUDIO',
+    tagline:'Pilote ton vaisseau 🚀\nÉvite les ◆ qui tombent\nAccomplis des quêtes pour des récompenses !',
+    nextGame:'PROCHAINE PARTIE', easy:'FACILE', normal:'NORMAL', hard:'DIFFICILE', hardcore:'HARDCORE',
+    leaderboard:'🏆 CLASSEMENT', global:'🌍 GLOBAL',
+  },
+  en:{
+    play:'▶ PLAY', crash:'CRASH!', points:'POINTS', best:'BEST',
+    coins:'COINS', replay:'▶ REPLAY', login:'LOGIN', register:'CREATE ACCOUNT',
+    username:'USERNAME', password:'PASSWORD', connect:'SIGN IN',
+    create:'CREATE', noAccount:'No account?', createAccount:'Create account',
+    hasAccount:'Already have an account?', signIn:'Sign in',
+    scores:'🏆 SCORES', levels:'⚡ LEVELS', tuto:'📖 GUIDE', shop:'🛒 SHOP', profile:'👤 PROFILE',
+    newRecord:'🏆 NEW RECORD!', studio:'WIKZOUU STUDIO',
+    tagline:'Pilot your ship 🚀\nDodge the falling ◆\nComplete quests for rewards!',
+    nextGame:'NEXT GAME', easy:'EASY', normal:'NORMAL', hard:'HARD', hardcore:'HARDCORE',
+    leaderboard:'🏆 LEADERBOARD', global:'🌍 GLOBAL',
+  },
+  es:{
+    play:'▶ JUGAR', crash:'¡CRASH!', points:'PUNTOS', best:'MEJOR',
+    coins:'MONEDAS', replay:'▶ REJUGAR', login:'INICIAR SESIÓN', register:'CREAR CUENTA',
+    username:'USUARIO', password:'CONTRASEÑA', connect:'CONECTAR',
+    create:'CREAR', noAccount:'¿Sin cuenta?', createAccount:'Crear cuenta',
+    hasAccount:'¿Ya tienes cuenta?', signIn:'Iniciar sesión',
+    scores:'🏆 PUNTUACIONES', levels:'⚡ NIVELES', tuto:'📖 GUÍA', shop:'🛒 TIENDA', profile:'👤 PERFIL',
+    newRecord:'🏆 ¡NUEVO RÉCORD!', studio:'WIKZOUU STUDIO',
+    tagline:'Pilota tu nave 🚀\nEvita los ◆ que caen\n¡Completa misiones para recompensas!',
+    nextGame:'PRÓXIMA PARTIDA', easy:'FÁCIL', normal:'NORMAL', hard:'DIFÍCIL', hardcore:'HARDCORE',
+    leaderboard:'🏆 CLASIFICACIÓN', global:'🌍 GLOBAL',
+  },
+  de:{
+    play:'▶ SPIELEN', crash:'CRASH!', points:'PUNKTE', best:'BESTES',
+    coins:'MÜNZEN', replay:'▶ NOCHMAL', login:'ANMELDEN', register:'KONTO ERSTELLEN',
+    username:'BENUTZERNAME', password:'PASSWORT', connect:'ANMELDEN',
+    create:'ERSTELLEN', noAccount:'Kein Konto?', createAccount:'Konto erstellen',
+    hasAccount:'Schon ein Konto?', signIn:'Anmelden',
+    scores:'🏆 PUNKTE', levels:'⚡ LEVEL', tuto:'📖 ANLEITUNG', shop:'🛒 SHOP', profile:'👤 PROFIL',
+    newRecord:'🏆 NEUER REKORD!', studio:'WIKZOUU STUDIO',
+    tagline:'Steuere dein Raumschiff 🚀\nWeiche den fallenden ◆ aus\nErfülle Quests für Belohnungen!',
+    nextGame:'NÄCHSTES SPIEL', easy:'EINFACH', normal:'NORMAL', hard:'SCHWER', hardcore:'HARDCORE',
+    leaderboard:'🏆 RANGLISTE', global:'🌍 GLOBAL',
+  },
+  it:{
+    play:'▶ GIOCA', crash:'CRASH!', points:'PUNTI', best:'MIGLIOR',
+    coins:'MONETE', replay:'▶ RIGIOCA', login:'ACCESSO', register:'CREA ACCOUNT',
+    username:'NOME UTENTE', password:'PASSWORD', connect:'ACCEDI',
+    create:'CREA', noAccount:'Nessun account?', createAccount:'Crea account',
+    hasAccount:'Hai già un account?', signIn:'Accedi',
+    scores:'🏆 PUNTEGGI', levels:'⚡ LIVELLI', tuto:'📖 GUIDA', shop:'🛒 NEGOZIO', profile:'👤 PROFILO',
+    newRecord:'🏆 NUOVO RECORD!', studio:'WIKZOUU STUDIO',
+    tagline:'Pilota la tua nave 🚀\nEvita i ◆ che cadono\nCompleta missioni per premi!',
+    nextGame:'PROSSIMA PARTITA', easy:'FACILE', normal:'NORMALE', hard:'DIFFICILE', hardcore:'HARDCORE',
+    leaderboard:'🏆 CLASSIFICA', global:'🌍 GLOBALE',
+  },
+  hr:{
+    play:'▶ IGRAJ', crash:'CRASH!', points:'BODOVI', best:'NAJBOLJI',
+    coins:'NOVČIĆI', replay:'▶ PONOVI', login:'PRIJAVA', register:'STVORI RAČUN',
+    username:'KORISNIČKO IME', password:'LOZINKA', connect:'PRIJAVI SE',
+    create:'STVORI', noAccount:'Nemaš račun?', createAccount:'Stvori račun',
+    hasAccount:'Imaš račun?', signIn:'Prijavi se',
+    scores:'🏆 BODOVI', levels:'⚡ RAZINE', tuto:'📖 VODIČ', shop:'🛒 TRGOVINA', profile:'👤 PROFIL',
+    newRecord:'🏆 NOVI REKORD!', studio:'WIKZOUU STUDIO',
+    tagline:'Upravljaj svojim brodom 🚀\nIzbjegni padajuće ◆\nDovrši zadatke za nagrade!',
+    nextGame:'SLJEDEĆA IGRA', easy:'LAKO', normal:'NORMALNO', hard:'TEŠKO', hardcore:'HARDCORE',
+    leaderboard:'🏆 LJESTVICA', global:'🌍 GLOBALNO',
+  },
+};
+
+function t(key){ return (TRANSLATIONS[_lang]||TRANSLATIONS.fr)[key]||TRANSLATIONS.fr[key]||key; }
+
+function selectLang(lang){
+  _lang=lang;
+  try{localStorage.setItem('sp_lang',lang);}catch(e){}
+  document.getElementById('lang-screen').classList.add('hidden');
+  applyTranslations();
+  // Continue to auth or game
+  load();loadAccounts();updateCoinUI();updateAdminBadge();applySkin();renderQuest();
+  try{Audio.playBtnClick();}catch(e){}
+  if(currentUser)enterGame();
+  else{document.getElementById('auth-screen').classList.remove('hidden');initAuth();}
+}
+
+function applyTranslations(){
+  // Bouton JOUER
+  const btnStart=document.getElementById('btn-start');
+  if(btnStart)btnStart.textContent=t('play');
+  // Nav buttons
+  const btnTuto=document.getElementById('btn-tuto-start');if(btnTuto){btnTuto.querySelector('span:last-child').textContent=t('tuto').replace('📖 ','');}
+  const btnShop=document.getElementById('btn-shop-start');if(btnShop){btnShop.querySelector('span:last-child').textContent=t('shop').replace('🛒 ','');}
+  const btnLb=document.getElementById('btn-lb-start');if(btnLb){btnLb.querySelector('span:last-child').textContent=t('scores').replace('🏆 ','');}
+  const btnLp=document.getElementById('btn-lp-start');if(btnLp){btnLp.querySelector('span:last-child').textContent=t('levels').replace('⚡ ','');}
+  const btnProf=document.getElementById('btn-profile-start');if(btnProf){btnProf.querySelector('span:last-child').textContent=t('profile').replace('👤 ','');}
+  // Auth labels
+  const authTitle=document.querySelector('.auth-mode-title');if(authTitle)authTitle.textContent=t('login');
+  // Difficulty buttons
+  const diffs={easy:'easy',normal:'normal',hard:'hard',hardcore:'hardcore'};
+  Object.entries(diffs).forEach(([k,v])=>{
+    const btn=document.querySelector('.diff-btn[data-diff="'+k+'"]');
+    if(btn){const span=btn.querySelector('span:nth-child(2)');if(span)span.textContent=t(v);}
+  });
+  // Subtitles
+  const sub=document.querySelector('.sub');
+  if(sub)sub.innerHTML=t('tagline').replace(/\n/g,'<br>');
+  // Studio tag
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.textContent=t(el.dataset.i18n);
+  });
+}
+
 function saveScore(){
   if(!currentUser)return;
   try{
@@ -7500,11 +7689,22 @@ window.addEventListener('resize',()=>{if(_shopTab==='skins')updateCarousel(false
   function nextStep(){if(si>=steps.length){finish();return;}const s=steps[si++];bar.style.width=s.p+'%';pct.textContent=s.p+'%';status.textContent=s.txt;setTimeout(nextStep,si===steps.length?400:150+Math.random()*200);}
   function finish(){setTimeout(()=>{screen.classList.add('fade-out');screen.addEventListener('animationend',()=>{
     screen.style.display='none';
-    load();loadAccounts();updateCoinUI();updateAdminBadge();applySkin();renderQuest();
-    try{drawPixelLogo('auth-logo-canvas',4);}catch(e){}
-    // Go directly to auth or game (no intro)
-    if(currentUser)enterGame();
-    else{document.getElementById('auth-screen').classList.remove('hidden');initAuth();}
+    // Première fois → choisir la langue
+    const langChosen=localStorage.getItem('sp_lang');
+    if(!langChosen){
+      // Copier la mascotte dans l'écran de langue
+      const mascotLoad=document.getElementById('mascot-load');
+      const mascotLang=document.getElementById('mascot-lang');
+      if(mascotLoad&&mascotLang)mascotLang.innerHTML=mascotLoad.innerHTML;
+      document.getElementById('lang-screen').classList.remove('hidden');
+    } else {
+      _lang=langChosen;
+      load();loadAccounts();updateCoinUI();updateAdminBadge();applySkin();renderQuest();
+      try{drawPixelLogo('auth-logo-canvas',4);}catch(e){}
+      applyTranslations();
+      if(currentUser)enterGame();
+      else{document.getElementById('auth-screen').classList.remove('hidden');initAuth();}
+    }
   },{once:true});},600);}
   setTimeout(nextStep,350);
 })();
