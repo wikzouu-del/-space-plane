@@ -2257,9 +2257,9 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
 <div id="daily-bonus">
   <div id="daily-bonus-card">
     <span class="daily-icon">🪙</span>
-    <div class="daily-title">BONUS QUOTIDIEN</div>
+    <div class="daily-title" id="daily-title-el">BONUS QUOTIDIEN</div>
     <div class="daily-amount" id="daily-amount">+200</div>
-    <div class="daily-sub">Tu es revenu jouer !</div>
+    <div class="daily-sub" id="daily-sub-el">Tu es revenu jouer !</div>
     <div class="daily-streak" id="daily-streak"></div>
     <button id="daily-claim-btn">🎁 RÉCUPÉRER</button>
   </div>
@@ -2396,22 +2396,22 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
       <span class="diff-hearts">❤️</span>
     </button>
   </div>
-  <!-- Icon nav row — compact, no arrows -->
-  <div style="display:flex;gap:12px;justify-content:center;margin-top:8px;">
-    <button id="btn-profile-start" style="display:none;flex-direction:column;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 14px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:8px;letter-spacing:1px;">
-      <span style="font-size:20px">👤</span>PROFIL
+  <!-- Icon nav row — compact -->
+  <div style="display:flex;gap:6px;justify-content:center;margin-top:6px;width:100%;max-width:340px;flex-wrap:nowrap;">
+    <button id="btn-profile-start" style="display:none;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:7px 6px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:6px;letter-spacing:1px;flex:1;min-width:0;">
+      <span style="font-size:16px">👤</span><span>PROFIL</span>
     </button>
-    <button id="btn-tuto-start" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 14px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:8px;letter-spacing:1px;">
-      <span style="font-size:20px">📖</span>TUTO
+    <button id="btn-tuto-start" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:7px 6px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:6px;letter-spacing:1px;flex:1;min-width:0;">
+      <span style="font-size:16px">📖</span><span>TUTO</span>
     </button>
-    <button id="btn-shop-start" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(255,214,10,.08);border:1px solid rgba(255,214,10,.2);border-radius:16px;padding:10px 14px;cursor:pointer;transition:all .15s;color:rgba(255,214,10,.9);font-family:Orbitron;font-size:8px;letter-spacing:1px;">
-      <span style="font-size:20px">🛒</span>SHOP
+    <button id="btn-shop-start" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,214,10,.08);border:1px solid rgba(255,214,10,.2);border-radius:12px;padding:7px 6px;cursor:pointer;transition:all .15s;color:rgba(255,214,10,.9);font-family:Orbitron;font-size:6px;letter-spacing:1px;flex:1;min-width:0;">
+      <span style="font-size:16px">🛒</span><span>SHOP</span>
     </button>
-    <button id="btn-lb-start" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 14px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:8px;letter-spacing:1px;">
-      <span style="font-size:20px">🏆</span>SCORES
+    <button id="btn-lb-start" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:7px 6px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:6px;letter-spacing:1px;flex:1;min-width:0;">
+      <span style="font-size:16px">🏆</span><span>SCORES</span>
     </button>
-    <button id="btn-lp-start" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 14px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:8px;letter-spacing:1px;">
-      <span style="font-size:20px">⚡</span>NIVEAUX
+    <button id="btn-lp-start" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:7px 6px;cursor:pointer;transition:all .15s;color:rgba(255,255,255,.7);font-family:Orbitron;font-size:6px;letter-spacing:1px;flex:1;min-width:0;">
+      <span style="font-size:16px">⚡</span><span>NIVEAUX</span>
     </button>
   </div>
 </div>
@@ -2428,7 +2428,7 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
     <div style="text-align:center;"><div class="lbl">PIÈCES</div><div class="best-val" id="run-coins">+0</div></div>
   </div>
   <!-- Sélecteur difficulté sur l'écran de fin -->
-  <div style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.35);margin-top:10px;font-family:Rajdhani,monospace;">PROCHAINE PARTIE</div>
+  <div data-i18n="nextGame" style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.35);margin-top:10px;font-family:Rajdhani,monospace;">PROCHAINE PARTIE</div>
   <div id="diff-selector-over" style="display:flex;gap:5px;width:100%;max-width:300px;margin-top:4px;">
     <button class="diff-btn" data-diff="easy" onclick="setDifficulty('easy');syncDiffButtons()">
       <span class="diff-icon">😊</span><span>FACILE</span><span class="diff-hearts">❤️❤️❤️❤️</span>
@@ -2470,11 +2470,11 @@ body{background:var(--bg);display:flex;align-items:center;justify-content:center
   </div>
   <!-- Tabs -->
   <div id="shop-tabs">
-    <button class="shop-tab active" data-tab="skins">✈️ SKINS</button>
-    <button class="shop-tab" data-tab="upgrades">⚡ AMÉLIOS</button>
-    <button class="shop-tab" data-tab="extras">✨ EXTRAS</button>
-    <button class="shop-tab" data-tab="music">🎵 SON</button>
-    <button class="shop-tab" data-tab="admin">🔐 ADMIN</button>
+    <button class="shop-tab active" data-tab="skins" data-i18n-tab="shopSkins">✈️ SKINS</button>
+    <button class="shop-tab" data-tab="upgrades" data-i18n-tab="shopUpgrades">⚡ AMÉLIOS</button>
+    <button class="shop-tab" data-tab="extras" data-i18n-tab="shopExtras">✨ EXTRAS</button>
+    <button class="shop-tab" data-tab="music" data-i18n-tab="shopMusic">🎵 SON</button>
+    <button class="shop-tab" data-tab="admin" data-i18n-tab="shopAdmin">🔐 ADMIN</button>
   </div>
   <!-- Skins section — horizontal carousel -->
   <div id="shop-skins-section">
@@ -4056,6 +4056,10 @@ function checkDailyBonus(){
     if(amountEl)amountEl.textContent='+'+total+'🪙';
     if(streakEl)streakEl.textContent=streak>1?'🔥 '+streak+' JOURS DE SUITE !':(streak===1?'Jour 1':'');
     popup.classList.add('active');
+    const dtEl=document.getElementById('daily-title-el');if(dtEl)dtEl.textContent=t('dailyBonus');
+    const dsEl=document.getElementById('daily-sub-el');if(dsEl)dsEl.textContent=t('dailySub');
+    const dcBtn=document.getElementById('daily-claim-btn');if(dcBtn)dcBtn.textContent=t('dailyClaim');
+    if(streak>1){const stEl=document.getElementById('daily-streak');if(stEl)stEl.textContent='🔥 '+streak+' '+t('streak');}
     document.getElementById('daily-claim-btn').onclick=()=>{
       coins+=total;runCoins+=total;save();updateCoinUI();
       data.lastDay=today;data.streak=streak;
@@ -4254,7 +4258,7 @@ function applyLevelReward(lv){const r=LEVEL_REWARDS[Math.min(lv,LEVEL_REWARDS.le
   else if(r.type==='skin'){if(!ownedSkins.includes(r.id)){ownedSkins.push(r.id);const sk=SKINS.find(s=>s.id===r.id);if(sk){const svg=`<svg viewBox="0 0 52 56" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 10px ${sk.glow})">${sk.svg}</svg>`;showUnlockAnimation({svgHtml:svg,name:sk.name,desc:'Skin débloqué au niveau '+lv,rarity:sk.rarity,color:sk.glow});}}}
   else if(r.type==='upgrade'){const cat=CATALOG.find(c=>c.id===r.id);if(cat&&upgrades[r.id]<cat.maxLevel){upgrades[r.id]++;showUnlockAnimation({icon:cat.icon,name:cat.name,desc:'Débloqué au niveau '+lv,rarity:'upgrade',color:'#00cfff'});}}
   save();}
-function showLevelUpPopup(){const r=LEVEL_REWARDS[Math.min(playerLevel,LEVEL_REWARDS.length-1)];const popup=document.createElement('div');popup.style.cssText='position:absolute;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,8,0,.92);font-family:Orbitron,monospace;';const rewardHtml=r?`<div style="margin-top:20px;background:rgba(255,214,10,.1);border:1px solid rgba(255,214,10,.35);border-radius:14px;padding:16px 28px;text-align:center"><div style="font-size:36px;margin-bottom:8px">${r.icon}</div><div style="font-size:10px;letter-spacing:3px;color:rgba(255,214,10,.6);margin-bottom:4px">RÉCOMPENSE</div><div style="font-size:16px;font-weight:700;color:var(--neon)">${r.label}</div></div>`:'';popup.innerHTML=`<div style="font-size:11px;letter-spacing:4px;color:rgba(255,214,10,.5);margin-bottom:8px">NIVEAU ATTEINT</div><div style="font-size:52px;font-weight:900;color:var(--neon);text-shadow:0 0 40px var(--neon);letter-spacing:4px">NIVEAU ${playerLevel}</div>${rewardHtml}<button id="lup-btn" style="margin-top:24px;padding:12px 32px;background:var(--neon);border:none;color:#000;font-family:Orbitron,monospace;font-size:12px;font-weight:900;letter-spacing:3px;border-radius:10px;cursor:pointer;touch-action:manipulation;">SUPER !</button>`;wrapper.appendChild(popup);popup.querySelector('#lup-btn').addEventListener('click',()=>popup.remove());}
+function showLevelUpPopup(){const r=LEVEL_REWARDS[Math.min(playerLevel,LEVEL_REWARDS.length-1)];const popup=document.createElement('div');popup.style.cssText='position:absolute;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,8,0,.92);font-family:Orbitron,monospace;';const rewardHtml=r?`<div style="margin-top:20px;background:rgba(255,214,10,.1);border:1px solid rgba(255,214,10,.35);border-radius:14px;padding:16px 28px;text-align:center"><div style="font-size:36px;margin-bottom:8px">${r.icon}</div><div style="font-size:10px;letter-spacing:3px;color:rgba(255,214,10,.6);margin-bottom:4px">${t('reward')}</div><div style="font-size:16px;font-weight:700;color:var(--neon)">${r.label}</div></div>`:'';popup.innerHTML=`<div style="font-size:11px;letter-spacing:4px;color:rgba(255,214,10,.5);margin-bottom:8px">${t('levelUp')}</div><div style="font-size:52px;font-weight:900;color:var(--neon);text-shadow:0 0 40px var(--neon);letter-spacing:4px">${t('level')} ${playerLevel}</div>${rewardHtml}<button id="lup-btn" style="margin-top:24px;padding:12px 32px;background:var(--neon);border:none;color:#000;font-family:Orbitron,monospace;font-size:12px;font-weight:900;letter-spacing:3px;border-radius:10px;cursor:pointer;touch-action:manipulation;">${t('awesome')}</button>`;wrapper.appendChild(popup);popup.querySelector('#lup-btn').addEventListener('click',()=>popup.remove());}
 
 // ─── GAME LOOP ───
 function loop(ts){
@@ -5402,7 +5406,7 @@ function spawnBoss(){
   if(bar){bar.classList.add('active');document.getElementById('boss-hp-fill').style.width='100%';}
   if(lbl){lbl.classList.add('active');lbl.textContent='👹 BOSS — '+_bossHP+' HP';}
   // Annonce
-  showFormationBanner&&showFormationBanner('👹 BOSS APPARU — DÉTRUIS-LE !','#ff2d55');
+  showFormationBanner&&showFormationBanner(t('bossAppear'),'#ff2d55');
   try{if(navigator.vibrate)navigator.vibrate([100,50,100,50,200]);}catch(e){}
   // Son boss
   try{
@@ -5492,7 +5496,7 @@ function killBoss(){
   bigExplosion(_bossX+10,_bossY+10,'#ff8c00');
   const reward=500+Math.floor(score/500)*200;
   coins+=reward;runCoins+=reward;save();updateCoinUI();
-  showFormationBanner&&showFormationBanner('💥 BOSS VAINCU ! +'+reward+'🪙','#39ff14');
+  showFormationBanner&&showFormationBanner(t('bossKilled')+' +'+reward+'🪙','#39ff14');
   try{if(navigator.vibrate)navigator.vibrate([200,50,100,50,200,50,400]);}catch(e){}
   checkAchievements&&checkAchievements();
 }
@@ -5907,6 +5911,11 @@ const TRANSLATIONS = {
     tagline:'Pilote ton vaisseau 🚀\nÉvite les ◆ qui tombent\nAccomplis des quêtes pour des récompenses !',
     nextGame:'PROCHAINE PARTIE', easy:'FACILE', normal:'NORMAL', hard:'DIFFICILE', hardcore:'HARDCORE',
     leaderboard:'🏆 CLASSEMENT', global:'🌍 GLOBAL',
+    levelUp:'NIVEAU ATTEINT', reward:'RÉCOMPENSE', awesome:'SUPER !',
+    level:'NIVEAU', xpNext:'XP pour le prochain niveau', next:'SUIVANT',
+    achievUnlocked:'SUCCÈS DÉBLOQUÉ !', bossAppear:'👹 BOSS APPARU — DÉTRUIS-LE !',
+    bossKilled:'💥 BOSS VAINCU !', dailyBonus:'BONUS QUOTIDIEN', dailySub:'Tu es revenu jouer !',
+    dailyClaim:'🎁 RÉCUPÉRER', streak:'JOURS DE SUITE !',
   },
   en:{
     play:'▶ PLAY', crash:'CRASH!', points:'POINTS', best:'BEST',
@@ -5985,29 +5994,75 @@ function selectLang(lang){
 }
 
 function applyTranslations(){
-  // Bouton JOUER
+  // ── Bouton JOUER ──
   const btnStart=document.getElementById('btn-start');
   if(btnStart)btnStart.textContent=t('play');
-  // Nav buttons
-  const btnTuto=document.getElementById('btn-tuto-start');if(btnTuto){btnTuto.querySelector('span:last-child').textContent=t('tuto').replace('📖 ','');}
-  const btnShop=document.getElementById('btn-shop-start');if(btnShop){btnShop.querySelector('span:last-child').textContent=t('shop').replace('🛒 ','');}
-  const btnLb=document.getElementById('btn-lb-start');if(btnLb){btnLb.querySelector('span:last-child').textContent=t('scores').replace('🏆 ','');}
-  const btnLp=document.getElementById('btn-lp-start');if(btnLp){btnLp.querySelector('span:last-child').textContent=t('levels').replace('⚡ ','');}
-  const btnProf=document.getElementById('btn-profile-start');if(btnProf){btnProf.querySelector('span:last-child').textContent=t('profile').replace('👤 ','');}
-  // Auth labels
-  const authTitle=document.querySelector('.auth-mode-title');if(authTitle)authTitle.textContent=t('login');
-  // Difficulty buttons
-  const diffs={easy:'easy',normal:'normal',hard:'hard',hardcore:'hardcore'};
-  Object.entries(diffs).forEach(([k,v])=>{
-    const btn=document.querySelector('.diff-btn[data-diff="'+k+'"]');
-    if(btn){const span=btn.querySelector('span:nth-child(2)');if(span)span.textContent=t(v);}
+
+  // ── Nav buttons menu ──
+  const navMap=[
+    ['btn-tuto-start','tuto','📖 '],
+    ['btn-shop-start','shop','🛒 '],
+    ['btn-lb-start','scores','🏆 '],
+    ['btn-lp-start','levels','⚡ '],
+    ['btn-profile-start','profile','👤 '],
+  ];
+  navMap.forEach(([id,key,pfx])=>{
+    const btn=document.getElementById(id);
+    if(btn){const s=btn.querySelector('span:last-child');if(s)s.textContent=t(key).replace(pfx,'');}
   });
-  // Subtitles
+
+  // ── Shop title ──
+  const shopTitle=document.getElementById('shop-title');
+  if(shopTitle)shopTitle.textContent=t('shop');
+
+  // ── Shop tabs (data-i18n-tab) ──
+  document.querySelectorAll('[data-i18n-tab]').forEach(tab=>{
+    tab.textContent=t(tab.dataset.i18nTab);
+  });
+
+  // ── Leaderboard ──
+  const lbTitle=document.getElementById('lb-title');
+  if(lbTitle)lbTitle.innerHTML=t('lbTitle')+' <span style="font-size:8px;letter-spacing:2px;color:#39ff14;font-family:Rajdhani,monospace;opacity:.8">'+t('global')+'</span>';
+  document.querySelectorAll('.lb-tab').forEach((tab,i)=>{
+    if(i===0)tab.textContent='🎯 '+t('lbScore');
+    if(i===1)tab.textContent='🪙 '+t('lbCoins');
+  });
+
+  // ── Level pass ──
+  const lpHdr=document.getElementById('lp-header-title');
+  if(lpHdr)lpHdr.textContent=t('lvlTitle');
+
+  // ── Auth ──
+  const authTitle=document.querySelector('.auth-mode-title');
+  if(authTitle)authTitle.textContent=t('login');
+
+  // ── Game over ──
+  const finalLbls=document.querySelectorAll('.lbl');
+  finalLbls.forEach(el=>{
+    const txt=el.textContent.trim();
+    if(['POINTS','PUNTOS','PUNKTE','PUNTI','BODOVI'].includes(txt))el.textContent=t('points');
+    else if(['MEILLEUR','BEST','MEJOR','BESTES','MIGLIOR','NAJBOLJI'].includes(txt))el.textContent=t('best');
+    else if(['PIÈCES','COINS','MONEDAS','MÜNZEN','MONETE','NOVČIĆI'].includes(txt))el.textContent=t('coins');
+  });
+
+  // ── Difficulty buttons (tous les sélecteurs) ──
+  ['easy','normal','hard','hardcore'].forEach(k=>{
+    document.querySelectorAll('.diff-btn[data-diff="'+k+'"]').forEach(btn=>{
+      const span=btn.querySelector('span:nth-child(2)');
+      if(span)span.textContent=t(k);
+    });
+  });
+
+  // ── Tagline menu ──
   const sub=document.querySelector('.sub');
   if(sub)sub.innerHTML=t('tagline').replace(/\n/g,'<br>');
-  // Studio tag
+
+  // ── "PROCHAINE PARTIE" label ──
+  document.querySelectorAll('[data-i18n="nextGame"]').forEach(el=>el.textContent=t('nextGame'));
+
+  // ── data-i18n generique ──
   document.querySelectorAll('[data-i18n]').forEach(el=>{
-    el.textContent=t(el.dataset.i18n);
+    if(!el.dataset.iI18nDone)el.textContent=t(el.dataset.i18n);
   });
 }
 
@@ -7261,6 +7316,45 @@ function renderProfile(){
   body.appendChild(resetBtn);
 
   // ── Logout ──
+  // ── Langue ──
+  const langSection=document.createElement('div');
+  langSection.style.cssText='background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;margin-bottom:10px;';
+  const langTitle=document.createElement('div');
+  langTitle.style.cssText='font-size:8px;letter-spacing:3px;color:rgba(255,214,10,.6);margin-bottom:10px;';
+  langTitle.textContent='🌍 LANGUE';
+  langSection.appendChild(langTitle);
+  const langGrid=document.createElement('div');
+  langGrid.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:6px;';
+  const LANGS=[
+    {code:'fr',flag:'🇫🇷',name:'FR'},
+    {code:'en',flag:'🇬🇧',name:'EN'},
+    {code:'es',flag:'🇪🇸',name:'ES'},
+    {code:'de',flag:'🇩🇪',name:'DE'},
+    {code:'it',flag:'🇮🇹',name:'IT'},
+    {code:'hr',flag:'🇭🇷',name:'HR'},
+  ];
+  LANGS.forEach(l=>{
+    const btn=document.createElement('button');
+    const active=_lang===l.code;
+    btn.style.cssText=`display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;cursor:pointer;
+      background:${active?'rgba(255,214,10,0.15)':'rgba(255,255,255,0.05)'};
+      border:1px solid ${active?'rgba(255,214,10,0.4)':'rgba(255,255,255,0.08)'};
+      color:${active?'#ffd60a':'rgba(255,255,255,0.6)'};
+      font-family:Orbitron,monospace;font-size:9px;font-weight:${active?'700':'400'};
+      transition:all .15s;`;
+    btn.innerHTML=`<span style="font-size:16px">${l.flag}</span>${l.name}`;
+    btn.addEventListener('click',()=>{
+      _lang=l.code;
+      try{localStorage.setItem('sp_lang',l.code);}catch(e){}
+      try{Audio.playBtnClick();}catch(e){}
+      applyTranslations();
+      renderProfile(); // refresh
+    });
+    langGrid.appendChild(btn);
+  });
+  langSection.appendChild(langGrid);
+  body.appendChild(langSection);
+
   const logoutBtn=document.createElement('button');
   logoutBtn.className='profile-logout-btn';
   logoutBtn.textContent='🚪 SE DÉCONNECTER';
